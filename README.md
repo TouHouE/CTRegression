@@ -1,3 +1,5 @@
+## Prepare dataset & Configuration
+- Modify the `config.json` under `./static`
 ## Training Regressor
 ### Multi-GPU training
 ```sh
