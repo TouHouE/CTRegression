@@ -1,0 +1,64 @@
+{
+    "warmup": {
+        "epochs": 5,
+        "steps": 5000,
+        "factor": 0.999999,
+        "do_warmup": false
+    },
+    "loss": {
+        "init": "torch.nn.L1Loss",
+        "init_param": {}
+    },
+    "accelerator": {
+        "gradient_accumulation_steps": 16
+    },
+    "lr_scheduler": [
+        {
+            "init": "torch.optim.lr_scheduler.ReduceLROnPlateau",
+            "init_param": {
+                "mode": "min",
+                "factor": 0.25,
+                "min_lr": 0.000001,
+                "patience": 5
+            },
+            "warp_step": "lambda x: x"
+        },
+        {
+            "init": "torch.optim.lr_scheduler.CosineAnnealingWarmRestarts",
+            "init_param": {
+                "T_0": 10,
+                "T_mult": 2,
+                "eta_min": 0.000001
+            },
+            "warp_step": "lambda x: None"
+        }
+    ],
+    "loader": {
+        "train": {
+            "batch_size": 256,
+            "shuffle": false,
+            "num_workers": 4,
+            "pin_memory": true            
+        },
+        "val": {
+            "batch_size": 256,
+            "shuffle": false,
+            "num_workers": 4,
+            "pin_memory": true            
+        },
+        "collate_fn":"NBD.collate_fn",
+        "test_ratio": 0.2    
+    },
+    "dataset": {
+        "image_path":"/home/sdb_data/data/CT/image",
+        "label_path": "/home/sdb_data/data/CT/CCTA_Agtston_Score.xlsx",        
+        "target": "TotalArtery"
+    },
+    "lr": 0.0014,
+    "random_seed": 114514,
+    "epoch": 100,
+    "logging_dir": "log",
+    "project": "CTRegression",
+    "loss_fn": "torch.nn.RMSELoss",
+    "val_interval": 5
+}
