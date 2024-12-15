@@ -1,5 +1,5 @@
 {
-    "root": "/home/hsu/PycharmProjects/CTRegression",
+    "root": ,
     "warmup": {
         "total_num_steps": 500,
         "warmup_num_steps": 100
@@ -53,8 +53,8 @@
     "dataset": {
         "init": "OneGPUDataset",
         "init_param": {
-            "image_path":"/home/sdb_data/data/CT/image",
-            "label_path": "/home/sdb_data/data/CT/CCTA_Agtston_Score.xlsx",        
+            "image_path":,
+            "label_path": ,        
             "target": "TotalArtery",
             "transform": "T.Compose([T.ToTensor(), T.Resize((224, 224))])"
         }
